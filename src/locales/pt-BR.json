@@ -54,7 +54,10 @@
           "updateSettings": "Configurações de atualização",
           "autoCheckUpdate": "Verificar atualizações automaticamente",
           "permissionsSettings": "Configurações de Permissões",
-          "inputMonitoringPermission": "Permissão de Monitoramento de Entrada"
+          "inputMonitoringPermission": "Permissão de Monitoramento de Entrada",
+          "performanceSettings": "Configurações de Desempenho",
+          "mouseMoveThrottle": "Limitação de Movimento do Mouse",
+          "mouseMoveThrottleOptimize": "Otimização de Limitação"
         },
         "options": {
           "auto": "Sistema",
@@ -64,7 +67,9 @@
         "hints": {
           "showTaskbarIcon": "Uma vez ativado, você pode capturar a janela via OBS Studio.",
           "inputMonitoringPermission": "Ative a permissão de monitoramento de entrada para receber eventos de teclado e mouse do sistema para responder às suas ações.",
-          "inputMonitoringPermissionGuide": "Se a permissão já estiver ativada, primeiro selecione-a e clique no botão \"-\" para removê-la. Em seguida, adicione-a novamente manualmente e reinicie o aplicativo para garantir que a permissão entre em vigor."
+          "inputMonitoringPermissionGuide": "Se a permissão já estiver ativada, primeiro selecione-a e clique no botão \"-\" para removê-la. Em seguida, adicione-a novamente manualmente e reinicie o aplicativo para garantir que a permissão entre em vigor.",
+          "mouseMoveThrottle": "Controla a frequência de processamento de eventos de movimento do mouse no frontend em milissegundos. Valores menores respondem mais rápido, mas consomem mais desempenho. Faixa recomendada 8-33ms (aprox. 30-120fps). Defina como 0 para sem limite.",
+          "mouseMoveThrottleOptimize": "Quando ativado, o aplicativo armazenará em cache e otimizará as atualizações de posição do mouse durante a limitação, reduzindo a sobrecarga de processamento enquanto mantém um movimento suave."
         },
         "status": {
           "authorized": "Autorizado",

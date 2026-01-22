@@ -54,7 +54,10 @@
           "updateSettings": "Cài đặt cập nhật",
           "autoCheckUpdate": "Tự động kiểm tra cập nhật",
           "permissionsSettings": "Cài đặt quyền",
-          "inputMonitoringPermission": "Quyền giám sát đầu vào"
+          "inputMonitoringPermission": "Quyền giám sát đầu vào",
+          "performanceSettings": "Cài đặt hiệu suất",
+          "mouseMoveThrottle": "Giới hạn di chuyển chuột",
+          "mouseMoveThrottleOptimize": "Tối ưu giới hạn"
         },
         "options": {
           "auto": "Theo hệ thống",
@@ -64,7 +67,9 @@
         "hints": {
           "showTaskbarIcon": "Bật để có thể quay cửa sổ qua OBS.",
           "inputMonitoringPermission": "Bật quyền giám sát để nhận sự kiện bàn phím và chuột từ hệ thống nhằm phản hồi thao tác của bạn.",
-          "inputMonitoringPermissionGuide": "Nếu quyền đã được bật, hãy chọn nó và nhấn nút \"-\" để xóa. Sau đó thêm lại thủ công và khởi động lại ứng dụng để đảm bảo quyền được áp dụng."
+          "inputMonitoringPermissionGuide": "Nếu quyền đã được bật, hãy chọn nó và nhấn nút \"-\" để xóa. Sau đó thêm lại thủ công và khởi động lại ứng dụng để đảm bảo quyền được áp dụng.",
+          "mouseMoveThrottle": "Kiểm soát tần suất xử lý sự kiện di chuyển chuột ở frontend theo mili giây. Giá trị thấp hơn phản hồi nhanh hơn nhưng tiêu tốn hiệu suất cao hơn. Khuyến nghị 8-33ms (khoảng 30-120fps). Đặt 0 để không giới hạn.",
+          "mouseMoveThrottleOptimize": "Khi bật, ứng dụng sẽ lưu vào bộ nhớ cache và tối ưu hóa các cập nhật vị trí chuột trong quá trình giới hạn, giảm chi phí xử lý trong khi vẫn giữ được chuyển động mượt mà."
         },
         "status": {
           "authorized": "Đã cấp quyền",

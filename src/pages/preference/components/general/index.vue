@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { disable, enable, isEnabled } from '@tauri-apps/plugin-autostart'
-import { Select, Switch } from 'ant-design-vue'
-import { watch } from 'vue'
+import { InputNumber, Select, Switch } from 'ant-design-vue'
+import { computed, watch } from 'vue'
 
 import MacosPermissions from './components/macos-permissions/index.vue'
 import ThemeMode from './components/theme-mode/index.vue'
@@ -23,6 +23,14 @@ watch(() => generalStore.app.autostart, async (value) => {
     disable()
   }
 }, { immediate: true })
+
+// 计算推荐的 FPS 值
+const recommendedFps = computed(() => {
+  const throttleMs = generalStore.performance.mouseMoveThrottle
+  if (throttleMs <= 0) return '∞'
+  const fps = Math.round(1000 / throttleMs)
+  return `${fps} FPS`
+})
 </script>
 
 <template>
@@ -65,6 +73,32 @@ watch(() => generalStore.app.autostart, async (value) => {
   <ProList :title="$t('pages.preference.general.labels.updateSettings')">
     <ProListItem :title="$t('pages.preference.general.labels.autoCheckUpdate')">
       <Switch v-model:checked="generalStore.update.autoCheck" />
+    </ProListItem>
+  </ProList>
+
+  <ProList :title="$t('pages.preference.general.labels.performanceSettings')">
+    <ProListItem
+      :description="$t('pages.preference.general.hints.mouseMoveThrottle')"
+      :title="$t('pages.preference.general.labels.mouseMoveThrottle')"
+    >
+      <InputNumber
+        v-model:value="generalStore.performance.mouseMoveThrottle"
+        :max="100"
+        :min="0"
+        :step="1"
+        style="width: 150px"
+      >
+        <template #addonAfter>
+          ms ({{ recommendedFps }})
+        </template>
+      </InputNumber>
+    </ProListItem>
+
+    <ProListItem
+      :description="$t('pages.preference.general.hints.mouseMoveThrottleOptimize')"
+      :title="$t('pages.preference.general.labels.mouseMoveThrottleOptimize')"
+    >
+      <Switch v-model:checked="generalStore.performance.mouseMoveThrottleOptimize" />
     </ProListItem>
   </ProList>
 </template>

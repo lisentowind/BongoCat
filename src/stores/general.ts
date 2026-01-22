@@ -21,6 +21,10 @@ export interface GeneralStore {
   update: {
     autoCheck: boolean
   }
+  performance: {
+    mouseMoveThrottle: number
+    mouseMoveThrottleOptimize: boolean
+  }
 }
 
 export const useGeneralStore = defineStore('general', () => {
@@ -58,6 +62,11 @@ export const useGeneralStore = defineStore('general', () => {
     autoCheck: false,
   })
 
+  const performance = reactive<GeneralStore['performance']>({
+    mouseMoveThrottle: 16,
+    mouseMoveThrottleOptimize: true,
+  })
+
   const getLanguage = async () => {
     const locale = await getLocale<Language>()
 
@@ -89,6 +98,7 @@ export const useGeneralStore = defineStore('general', () => {
     app,
     appearance,
     update,
+    performance,
     init,
   }
 })

@@ -54,7 +54,10 @@
           "updateSettings": "Update Settings",
           "autoCheckUpdate": "Auto Check for Updates",
           "permissionsSettings": "Permissions Settings",
-          "inputMonitoringPermission": "Input Monitoring Permission"
+          "inputMonitoringPermission": "Input Monitoring Permission",
+          "performanceSettings": "Performance Settings",
+          "mouseMoveThrottle": "Mouse Move Throttle",
+          "mouseMoveThrottleOptimize": "Throttle Optimization"
         },
         "options": {
           "auto": "System",
@@ -64,7 +67,9 @@
         "hints": {
           "showTaskbarIcon": "When enabled, the window can be captured via OBS Studio.",
           "inputMonitoringPermission": "Enable input monitoring to receive keyboard and mouse events from the system.",
-          "inputMonitoringPermissionGuide": "If the permission is already enabled, select it and click the \"-\" button to remove it, then manually add it again and restart the app."
+          "inputMonitoringPermissionGuide": "If the permission is already enabled, select it and click the \"-\" button to remove it, then manually add it again and restart the app.",
+          "mouseMoveThrottle": "Controls the frequency of frontend mouse move event processing in milliseconds. Lower values respond faster but consume more performance. Recommended range 8-33ms (approx. 30-120fps). Set to 0 for no limit.",
+          "mouseMoveThrottleOptimize": "When enabled, the app will cache and optimize mouse position updates during throttling to reduce processing overhead while maintaining smooth movement."
         },
         "status": {
           "authorized": "Authorized",

@@ -54,7 +54,10 @@
           "updateSettings": "更新设置",
           "autoCheckUpdate": "自动检查更新",
           "permissionsSettings": "权限设置",
-          "inputMonitoringPermission": "输入监控权限"
+          "inputMonitoringPermission": "输入监控权限",
+          "performanceSettings": "性能设置",
+          "mouseMoveThrottle": "鼠标移动节流",
+          "mouseMoveThrottleOptimize": "节流优化"
         },
         "options": {
           "auto": "跟随系统",
@@ -64,7 +67,9 @@
         "hints": {
           "showTaskbarIcon": "启用后，即可通过 OBS Studio 捕获窗口。",
           "inputMonitoringPermission": "开启输入监控权限，以便接收系统的键盘和鼠标事件来响应你的操作。",
-          "inputMonitoringPermissionGuide": "如果权限已开启，请先选中并点击“-”按钮将其删除，然后重新手动添加，最后重启应用以确保权限生效。"
+          "inputMonitoringPermissionGuide": "如果权限已开启，请先选中并点击\"-\"按钮将其删除，然后重新手动添加，最后重启应用以确保权限生效。",
+          "mouseMoveThrottle": "控制前端处理鼠标移动事件的频率，单位为毫秒。值越小响应越快但性能消耗越高，推荐范围 8-33ms（约 30-120fps）。设置为 0 表示不限制。",
+          "mouseMoveThrottleOptimize": "启用后，应用将在节流期间缓存并优化鼠标位置更新，在保持平滑移动的同时减少处理开销。"
         },
         "status": {
           "authorized": "已授权",

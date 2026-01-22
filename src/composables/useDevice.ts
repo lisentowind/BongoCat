@@ -1,4 +1,7 @@
+import type { PhysicalPosition } from '@tauri-apps/api/dpi'
+
 import { invoke } from '@tauri-apps/api/core'
+import { PhysicalPosition as PhysicalPositionImpl } from '@tauri-apps/api/dpi'
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { cursorPosition } from '@tauri-apps/api/window'
 
@@ -8,6 +11,7 @@ import { useModel } from './useModel'
 import { useTauriListen } from './useTauriListen'
 
 import { useCatStore } from '@/stores/cat'
+import { useGeneralStore } from '@/stores/general'
 import { useModelStore } from '@/stores/model'
 import { inBetween } from '@/utils/is'
 import { isWindows } from '@/utils/platform'
@@ -38,7 +42,12 @@ export function useDevice() {
   const modelStore = useModelStore()
   const releaseTimers = new Map<string, NodeJS.Timeout>()
   const catStore = useCatStore()
+  const generalStore = useGeneralStore()
   const { handlePress, handleRelease, handleMouseChange, handleMouseMove } = useModel()
+
+  let lastMouseMoveTime = 0
+  let pendingMove = false
+  let pendingMovePosition: PhysicalPosition | null = null
 
   const startListening = () => {
     invoke(INVOKE_KEY.START_DEVICE_LISTENING)
@@ -64,7 +73,22 @@ export function useDevice() {
   }
 
   const handleCursorMove = async () => {
-    const cursorPoint = await cursorPosition()
+    const now = Date.now()
+    const throttleMs = generalStore.performance.mouseMoveThrottle
+
+    // 前端节流处理
+    if (throttleMs > 0 && now - lastMouseMoveTime < throttleMs) {
+      if (generalStore.performance.mouseMoveThrottleOptimize) {
+        pendingMove = true
+      }
+      return
+    }
+
+    lastMouseMoveTime = now
+
+    const cursorPoint = pendingMovePosition || await cursorPosition()
+    pendingMovePosition = null
+    pendingMove = false
 
     handleMouseMove(cursorPoint)
 
@@ -81,6 +105,14 @@ export function useDevice() {
       if (!catStore.window.passThrough) {
         appWindow.setIgnoreCursorEvents(isInWindow)
       }
+    }
+
+    // 有挂起的移动事件 延迟到下一次处理
+    if (pendingMove && throttleMs > 0) {
+      const remainingTime = throttleMs - (Date.now() - lastMouseMoveTime)
+      setTimeout(() => {
+        handleCursorMove()
+      }, Math.max(0, remainingTime))
     }
   }
 
@@ -131,6 +163,10 @@ export function useDevice() {
       case 'MouseRelease':
         return handleMouseChange(value, false)
       case 'MouseMove':
+        // 缓存鼠标位置用于节流优化
+        if (generalStore.performance.mouseMoveThrottleOptimize) {
+          pendingMovePosition = new PhysicalPositionImpl(value.x, value.y)
+        }
         return handleCursorMove()
     }
   })
